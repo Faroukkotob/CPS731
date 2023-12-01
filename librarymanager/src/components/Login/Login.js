@@ -186,7 +186,6 @@ button {
                 <button type="submit" name="submit" value="Sign In">Login</button>
                 <div className="signup-text">
                     <p>Don’t have an account? <Link to="/signup" className="link-style">Sign-Up</Link></p>
-                    <p>temp <Link to="/libraryManager" className="link-style">libraryManager</Link></p>
                 </div>
             </div>
             </form>
