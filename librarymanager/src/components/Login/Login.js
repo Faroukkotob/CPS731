@@ -159,7 +159,7 @@ button {
             <div className="form-container">
                 <div className="input-group">
                     <label htmlFor="email">Email</label><br /><br />
-                    <input type="email" id="email" placeholder="email@gmail.com" />
+                    <input type="email" id="email" placeholder="johnDoe@gmail.com" />
                 </div>
                 <div className="input-group">
                     <label htmlFor="password">Password</label><br /><br />
