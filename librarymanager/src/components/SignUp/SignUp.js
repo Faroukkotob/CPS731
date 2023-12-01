@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-
+import { auth, app } from "../../firebase";
+import {createUserWithEmailAndPassword } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
 
 const SignUp = () => {
 
@@ -181,6 +183,22 @@ const SignUp = () => {
     }
     `;
 
+    const [email,setEmail] = useState('');
+    const [password,setPassword] = useState('');
+
+    const navigate = useNavigate('');
+    const signUp = (e) => {
+        e.preventDefault()
+        createUserWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+            //console.log(userCredential);
+            navigate("/login")
+        })
+        .catch((error) => {
+            //console.log(error)
+        });
+    }
+
     return (
         <>
             <style>{scopedStyles}</style>
@@ -190,6 +208,7 @@ const SignUp = () => {
                 <div className="image-container">
                     <img src={process.env.PUBLIC_URL + '/login.png'} alt="Main Image" />
                 </div>
+                <form onSubmit={signUp}>
                 <div className="form-container">
                     <div className="input-group">
                         <label htmlFor="firstName">First Name</label><br /><br />
@@ -201,17 +220,18 @@ const SignUp = () => {
                     </div>
                     <div className="input-group">
                         <label htmlFor="email">Email</label><br /><br />
-                        <input type="email" id="email" placeholder="email@gmail.com" />
+                        <input type="email" id="email" value={email} onChange={(e)=> setEmail(e.target.value)}  placeholder="email@gmail.com" />
                     </div>
                     <div className="input-group">
                         <label htmlFor="password">Password</label><br /><br />
-                        <input type="password" id="password" placeholder="Password" />
+                        <input type="password" id="password" value={password} onChange={(e)=> setPassword(e.target.value)}  placeholder="Password" />
                     </div><br></br>
                     <button type="submit">Sign Up</button>
                     <div className="signup-text">
                       <p style={{ fontSize: '18px' }}>Already Have An Account?<Link to="/login" className="link-style"> Sign-in</Link></p>
                     </div>
                 </div>
+                </form>
             </div>
         </>
     );
