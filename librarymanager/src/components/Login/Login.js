@@ -1,13 +1,21 @@
-body {
-    margin: 0;
-    padding: 0;
-    font-family: 'Abhaya Libre SemiBold', sans-serif;
-    background: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-}
+import React from 'react';
+import {Link} from "react-router-dom";
+
+
+
+const Login = () => {
+
+    const scopedStyles = `
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Abhaya Libre SemiBold', sans-serif;
+        background: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+    }
 
 .background-element {
     position: absolute;
@@ -129,8 +137,44 @@ button {
     font-weight: 600;
     line-height: normal;
 }
-
+.input-group input::placeholder {
+    font-size: 18px; 
+    color: #999; 
+}
 
 .link-style {
     color: #3C615C;
 }
+
+    `;
+    return (
+        <>
+        <style>{scopedStyles}</style>
+        <div className="login-container">
+            <div className="background-element"></div>
+            <div className="background-element-bottom-left"></div>
+            <div className="image-container">
+                <img src={process.env.PUBLIC_URL + '/login.png'} alt="Main Image" />
+            </div>
+            <div className="form-container">
+                <div className="input-group">
+                    <label htmlFor="email">Email</label><br /><br />
+                    <input type="email" id="email" placeholder="email@gmail.com" />
+                </div>
+                <div className="input-group">
+                    <label htmlFor="password">Password</label><br /><br />
+                    <input type="password" id="password" placeholder="Password" />
+                </div>
+                <button type="submit">Login</button>
+                <div className="signup-text">
+                    <p>Don’t have an account? <Link to="/signup" className="link-style">Sign-Up</Link></p>
+                    <p>temp <Link to="/libraryManager" className="link-style">libraryManager</Link></p>
+                </div>
+            </div>
+        </div>
+        </>
+    );
+};
+
+export default Login;
+

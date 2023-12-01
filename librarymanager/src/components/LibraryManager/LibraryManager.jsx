@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import './LibraryManager.css';
 
 const Sidebar = () => (
@@ -16,7 +17,7 @@ const Sidebar = () => (
       <div className="sidebar-item">Manage Inventory (staff)</div>
     </div>
     <div className="sidebar-section">
-      <div className="sidebar-item">Profile</div>
+    <div className="sidebar-item"><Link to="/login" className="link-style">Profile</Link></div>
       <div className="sidebar-item">Logout</div>
     </div>
   </aside>
