@@ -24,7 +24,7 @@ const Sidebar = () => (
     </div>
   </aside>
 );
-//navigate("/libraryManager")
+
 
 
 const Checkout = () => {
@@ -32,8 +32,9 @@ const Checkout = () => {
   const scopedStyles = `
   .parent-container {
     display: flex;
-    width: 100%;
+    width: 110%;
     height: 90vh;
+    margin: 0 auto; 
   }
   
   .containerC {
@@ -97,7 +98,33 @@ label {
   .error-message {
     font-size: 14px;
     color: red;
-  }`;
+  }
+  .add-button {
+    background-color: rgba(91, 128, 120, 0.57);
+    width: 100px;
+    margin: 0 auto; 
+    display: block;
+  }
+  .pay-fines-button {
+    display: flex;
+    width: 400px;
+    padding: 16px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-radius: 8px;
+    background: var(--green, #1BB66E);
+    text-align: center;
+    color: white; /* Adjust text color */
+    font-size: 16px; /* Adjust font size */
+    cursor: pointer;
+    border: none;
+  }
+  
+  .pay-fines-button:hover {
+    background: var(--dark-green, #159358); /* Adjust hover background color */
+  }
+  `;
 
   const [showAddCardModal, setShowAddCardModal] = useState(false);
   const [cards, setCards] = useState([]);
@@ -107,8 +134,6 @@ label {
     name: '',
     expirationDate: '',
   });
-
-  const navigate = useNavigate('');
 
   const [cardNumberError, setCardNumberError] = useState('');
   const [expirationDateError, setExpirationDateError] = useState('');
@@ -164,6 +189,18 @@ label {
     updatedCards.splice(index, 1);
     setCards(updatedCards);
   };
+  const [books, setBooks] = useState([
+    { author: 'Author1', title: 'Book1', due: 'Due1', price: '10.0$' },
+    { author: 'Author2', title: 'Book2', due: 'Due2', price: '32.5$' },
+    // Add more books as needed
+  ]);
+
+  const totalFee = books.reduce((acc, book) => acc + parseFloat(book.price), 0);
+
+  const payFines = () => {
+    // Logic for handling payment, e.g., redirect to a payment gateway
+    alert(`Total Fee: $${totalFee.toFixed(2)} - Payment Successful`);
+  };
 
 
   return (
@@ -176,7 +213,7 @@ label {
             <center><h1>Cards</h1></center>
             
             {/* Add Card Button */}
-            <button onClick={openAddCardModal}>Add Card</button><br></br>
+            <button onClick={openAddCardModal} className="add-button" >Add Card</button><br></br>
 
             {/* Card Table */}
             <table>
@@ -263,6 +300,30 @@ label {
             )}
           </div>
           <div className="inside-element inside-element-right">
+            <table>
+            <thead>
+              <tr>
+                <th>Author</th>
+                <th>Title</th>
+                <th>Due</th>
+                <th>Price</th>
+              </tr>
+            </thead>
+            <tbody>
+              {books.map((book, index) => (
+              <tr key={index}>
+                <td>{book.author}</td>
+                <td>{book.title}</td>
+                <td>{book.due}</td>
+                <td>{book.price}</td>
+              </tr>
+              ))}
+            </tbody>
+            </table>
+            <div className="total-fee-section">
+              <p>Total Fee: ${totalFee.toFixed(2)}</p>
+              <button onClick={payFines} className="pay-fines-button">Pay Fines</button>
+            </div>
           </div>
         </div>
       </div>

@@ -15,7 +15,7 @@
     background: #FFF;
     box-shadow: 0px 20px 30px 0px rgba(0, 0, 0, 0.25);
     margin: auto; /* Center vertically and adjust margin-left */
-    margin-left: 600px; /* Add this if you want to keep the original margin-left */
+    margin-left: 300px; /*600*/
   }
   
   
@@ -65,4 +65,8 @@ label {
   .error-message {
     font-size: 14px;
     color: red;
+  }
+
+  .add-button {
+    color: blue;
   }
