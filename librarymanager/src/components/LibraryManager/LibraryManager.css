@@ -23,6 +23,9 @@
     height: 100vh;
     box-sizing: border-box;
     position: fixed;
+    top: 0;
+    bottom: 0;
+    overflow-y: auto;
 }
 
 .sidebar-section {
@@ -102,11 +105,22 @@
     margin: 0 10px;
     flex: 0 0 auto;
     text-align: center;
+    width: 200px; /* Adjust width as needed */
+    height: auto; /* Height is auto to adjust to content */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: #F5F5F5; /* Optional: Adds a background color to each book container */
+    padding: 10px; /* Optional: Adds some padding inside the book containers */
+    border-radius: 4px; /* Optional: Rounds the corners of the book containers */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Optional: Adds a subtle shadow to each book container */
 }
 
 .book img {
-    max-width: 100%;
-    height: auto;
+    width: 100%; /* Ensures image width is 100% of the container */
+    height: auto; /* Ensures the image height scales proportionally */
+    object-fit: contain; /* Ensures the image fits within the container without being cropped */
+    margin-bottom: 10px; /* Adds some space between the image and the text below */
 }
 
 /* Add Book Form Styles */
@@ -114,10 +128,11 @@
     margin-bottom: 2rem;
 }
 
-.add-book-form input[type="text"] {
+.add-book-form input[type="text"], .add-book-form textarea {
     margin-bottom: 1rem;
     width: 100%;
     padding: 0.5rem;
+    box-sizing: border-box; /* Ensures padding does not affect the overall width */
 }
 
 .add-book-form button {
@@ -143,11 +158,4 @@
 .sidebar-item button:focus {
     outline: 2px solid #007BFF;
     outline-offset: 2px;
-}
-
-.sidebar {
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    overflow-y: auto;
 }

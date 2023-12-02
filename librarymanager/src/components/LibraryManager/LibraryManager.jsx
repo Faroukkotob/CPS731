@@ -1,26 +1,40 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import './LibraryManager.css';
-import Navbar from "../Navbar/Navbar"
+import Navbar from "../Navbar/Navbar";
 
 const AddBookForm = ({ onAddBook }) => {
   const [title, setTitle] = useState('');
   const [author, setAuthor] = useState('');
-  const [cover, setCover] = useState('');
+  const [isbn, setIsbn] = useState('');
+  const [pictures, setPictures] = useState('');
+  const [description, setDescription] = useState(''); // State hook for description
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onAddBook({ id: Date.now(), title, author, cover });
+    const pictureArray = pictures.split('\n').filter(p => p.trim() !== '');
+    onAddBook({ 
+      id: Date.now(), 
+      title, 
+      author, 
+      isbn, 
+      pictures: pictureArray, 
+      description // Include description in the book object
+    });
+    // Reset the form fields
     setTitle('');
     setAuthor('');
-    setCover('');
+    setIsbn('');
+    setPictures('');
+    setDescription('');
   };
 
   return (
     <form onSubmit={handleSubmit} className="add-book-form">
       <input type="text" value={title} onChange={e => setTitle(e.target.value)} placeholder="Title" required />
       <input type="text" value={author} onChange={e => setAuthor(e.target.value)} placeholder="Author" required />
-      <input type="text" value={cover} onChange={e => setCover(e.target.value)} placeholder="Cover URL" required />
+      <input type="text" value={isbn} onChange={e => setIsbn(e.target.value)} placeholder="ISBN" required />
+      <textarea value={pictures} onChange={e => setPictures(e.target.value)} placeholder="Picture URLs (one per line)" required />
+      <textarea value={description} onChange={e => setDescription(e.target.value)} placeholder="Book Description" required />
       <button type="submit">Add Book</button>
     </form>
   );
@@ -30,9 +44,13 @@ const BookCarousel = ({ books }) => (
   <div className="carousel">
     {books.map(book => (
       <div className="book" key={book.id}>
-        <img src={book.cover} alt={book.title} />
+        {book.pictures.map((picture, index) => (
+          <img key={index} src={picture} alt={`${book.title} - ${index + 1}`} />
+        ))}
         <h3>{book.title}</h3>
         <p>{book.author}</p>
+        <p>ISBN: {book.isbn}</p>
+        <p>{book.description}</p> {/* Display the description */}
       </div>
     ))}
   </div>
