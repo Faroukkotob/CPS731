@@ -1,29 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import '../LibraryManager/LibraryManager.css';
+import Navbar from "../Navbar/Navbar"
 import { useNavigate } from "react-router-dom";
-
-
-const Sidebar = () => (
-  <aside className="sidebar">
-    <div className="sidebar-section">
-      <div className="sidebar-item">Library</div>
-      <div className="search-container">
-        <form className="search-bar">
-          <input type="search" placeholder="Search books..." />
-          <button type="submit">🔍</button>
-        </form>
-      </div>
-      <div className="sidebar-item active">Dashboard</div>
-      <div className="sidebar-item">Reading List</div>
-      <div className="sidebar-item">Manage Inventory (staff)</div>
-    </div>
-    <div className="sidebar-section">
-    <div className="sidebar-item">Profile</div>
-      <div className="sidebar-item">Logout</div> 
-    </div>
-  </aside>
-);
 
 
 
@@ -205,7 +184,7 @@ label {
 
   return (
     <>
-      <Sidebar />
+      <Navbar />
       <style>{scopedStyles}</style>
       <div className="parent-container">
         <div className="containerC">
