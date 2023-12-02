@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import '../LibraryManager/LibraryManager.css';
+import Auth from '../Auth/Auth'
 
 const Navbar = () => (
     <aside className="sidebar">
@@ -20,11 +21,11 @@ const Navbar = () => (
         <button className="sidebar-item">
           <Link to="/login" className="link-style">Profile</Link>
         </button>
-        <button className="sidebar-item">Logout</button>
+        <Auth />
       </div>
     </aside>
   );
 
   export default Navbar;
 
-  
+  //        <button className="sidebar-item">Logout</button>
