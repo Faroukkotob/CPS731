@@ -5,20 +5,22 @@ import './LibraryManager.css';
 const Sidebar = () => (
   <aside className="sidebar">
     <div className="sidebar-section">
-      <div className="sidebar-item">Library</div>
+      <button className="sidebar-item">Library</button>
       <div className="search-container">
         <form className="search-bar">
           <input type="search" placeholder="Search books..." />
           <button type="submit">🔍</button>
         </form>
       </div>
-      <div className="sidebar-item active">Dashboard</div>
-      <div className="sidebar-item">Reading List</div>
-      <div className="sidebar-item">Manage Inventory (staff)</div>
+      <button className="sidebar-item active">Dashboard</button>
+      <button className="sidebar-item">Reading List</button>
+      <button className="sidebar-item">Manage Inventory (staff)</button>
     </div>
     <div className="sidebar-section">
-    <div className="sidebar-item"><Link to="/login" className="link-style">Profile</Link></div>
-      <div className="sidebar-item">Logout</div>
+      <button className="sidebar-item">
+        <Link to="/login" className="link-style">Profile</Link>
+      </button>
+      <button className="sidebar-item">Logout</button>
     </div>
   </aside>
 );

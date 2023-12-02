@@ -11,8 +11,8 @@
 .main-content {
     flex-grow: 1;
     padding: 1rem;
-    overflow: auto; 
-    margin-left: 20%; 
+    overflow: auto;
+    margin-left: 20%;
 }
 
 /* Sidebar Styles */
@@ -20,16 +20,16 @@
     width: 20%;
     background: #D9D9D9;
     padding: 10px;
-    height: 100vh; 
-    box-sizing: border-box; 
-    position: fixed; 
+    height: 100vh;
+    box-sizing: border-box;
+    position: fixed;
 }
 
 .sidebar-section {
     margin-bottom: 20px;
 }
 
-.sidebar-item {
+.sidebar-item, .sidebar-item button {
     color: black;
     font-size: 14px;
     font-family: 'Inter';
@@ -38,11 +38,35 @@
     letter-spacing: 0.14px;
     word-wrap: break-word;
     margin-bottom: 12px;
+    background: none;
+    border: none;
+    text-align: left;
+    width: 100%;
+    padding: 10px 0;
+    cursor: pointer;
+    display: block;
+    text-align: left;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
-.sidebar-item.active {
+.sidebar-item.active, .sidebar-item button.active {
     font-weight: 600;
     color: black;
+}
+
+.sidebar-item button:hover, .sidebar-item button:focus {
+    background: #B0B0B0;
+}
+
+.sidebar-item button {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
 }
 
 .search-container {
@@ -108,4 +132,22 @@
 .library-footer {
     padding: 1rem;
     background-color: #F5F5F5;
+}
+
+/* Additional Link Styles */
+.link-style {
+    text-decoration: none;
+    color: inherit;
+}
+
+.sidebar-item button:focus {
+    outline: 2px solid #007BFF;
+    outline-offset: 2px;
+}
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    overflow-y: auto;
 }
