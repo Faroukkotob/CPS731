@@ -1,0 +1,29 @@
+[
+    {
+        "id": "0",
+        "title": "Last Hope",
+        "isbn": "0593156986",
+        "author": "James Lopez",
+        "genre": "Non-Fiction",
+        "pictures": ["../../preloaded_books/covers/2.png"],
+        "description": ""
+    },
+    {
+        "id": "1",
+        "title": "Deathly Hallows",
+        "isbn": "9780545010221",
+        "author": "JK Rowling",
+        "genre": "Fantasy",
+        "pictures": ["../../preloaded_books/covers/1.png"],
+        "description": ""
+    },
+    {
+        "id": "2",
+        "title": "Sin Eater",
+        "isbn": "9780331928389",
+        "author": "Megan Campisi",
+        "genre": "Historical Fiction",
+        "pictures": ["../../preloaded_books/covers/2.png"],
+        "description": ""
+    }
+]
