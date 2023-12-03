@@ -68,7 +68,23 @@ const responsive = {
 
 const BookCarousel = ({ books }) => (
   <div className="carousel">
-    <Carousel responsive={responsive}> {
+    <Carousel 
+    swipeable={false}
+    draggable={false}
+    showDots={true}
+    responsive={responsive}
+    ssr={true} // means to render carousel on server-side.
+    infinite={true}
+    autoPlay={this.props.deviceType !== "mobile" ? true : false}
+    autoPlaySpeed={1000}
+    keyBoardControl={true}
+    customTransition="all .5"
+    transitionDuration={500}
+    containerClass="carousel-container"
+    removeArrowOnDeviceType={["tablet", "mobile"]}
+    deviceType={this.props.deviceType}
+    dotListClass="custom-dot-list-style"
+    itemClass="carousel-item-padding-40-px"> {
       books.map(book => (
         <div className="book" key={book.id}>
           {book.pictures.map((picture, index) => (
@@ -80,7 +96,7 @@ const BookCarousel = ({ books }) => (
           <p>{book.description}</p>
         </div>
       ))
-      }
+          }
     </Carousel>;
     </div>
     
