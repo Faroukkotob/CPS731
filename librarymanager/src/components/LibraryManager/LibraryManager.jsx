@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './LibraryManager.css';
 import Navbar from "../Navbar/Navbar";
 
@@ -7,7 +7,7 @@ const AddBookForm = ({ onAddBook }) => {
   const [author, setAuthor] = useState('');
   const [isbn, setIsbn] = useState('');
   const [pictures, setPictures] = useState('');
-  const [description, setDescription] = useState(''); // State hook for description
+  const [description, setDescription] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -18,9 +18,8 @@ const AddBookForm = ({ onAddBook }) => {
       author, 
       isbn, 
       pictures: pictureArray, 
-      description // Include description in the book object
+      description 
     });
-    // Reset the form fields
     setTitle('');
     setAuthor('');
     setIsbn('');
@@ -50,7 +49,7 @@ const BookCarousel = ({ books }) => (
         <h3>{book.title}</h3>
         <p>{book.author}</p>
         <p>ISBN: {book.isbn}</p>
-        <p>{book.description}</p> {/* Display the description */}
+        <p>{book.description}</p>
       </div>
     ))}
   </div>
@@ -59,8 +58,19 @@ const BookCarousel = ({ books }) => (
 const LibraryManager = () => {
   const [books, setBooks] = useState([]);
 
+  useEffect(() => {
+    const savedBooks = JSON.parse(localStorage.getItem('books'));
+    if (savedBooks) {
+      setBooks(savedBooks);
+    }
+  }, []);
+
   const handleNewBook = (newBook) => {
-    setBooks(prevBooks => [...prevBooks, newBook]);
+    setBooks(prevBooks => {
+      const updatedBooks = [...prevBooks, newBook];
+      localStorage.setItem('books', JSON.stringify(updatedBooks));
+      return updatedBooks;
+    });
   };
 
   return (
