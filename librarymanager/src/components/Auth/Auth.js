@@ -41,3 +41,4 @@ const Auth = () => {
 };
 
 export default Auth;
+export { auth, onAuthStateChanged, signOut };

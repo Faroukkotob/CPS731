@@ -5,6 +5,7 @@ import Navbar from "../Navbar/Navbar";
 import { useNavigate } from "react-router-dom";
 import { getFirestore, collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import { auth } from "../Auth/Auth";
+import Auth from '../Auth/Auth'; 
 
 
 
@@ -179,12 +180,6 @@ label {
   ]);
 
   const totalFee = books.reduce((acc, book) => acc + parseFloat(book.price), 0);
-  /*
-  const payFines = () => {
-    // Logic for handling payment, e.g., redirect to a payment gateway
-    alert(`Total Fee: $${totalFee.toFixed(2)} - Payment Successful`);
-    sendOrderToFirebase();
-  };*/
   const [selectedCard, setSelectedCard] = useState(null);
 
   const handleCardSelection = (card) => {
