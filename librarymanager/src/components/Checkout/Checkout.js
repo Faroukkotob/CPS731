@@ -174,8 +174,8 @@ label {
     setCards(updatedCards);
   };
   const [books, setBooks] = useState([
-    { author: 'tala', title: 'mth', due: 'mar 24', price: '131.2$' },
-    { author: 'maya', title: 'elc', due: 'DEC 24', price: '121.5$' },
+    { author: 'zuheir', title: 'psy', due: 'jan 24', price: '71.2$' },
+    { author: 'seema', title: 'cs', due: 'DEC 26', price: '13.5$' },
     // Add more books as needed
   ]);
 
@@ -233,29 +233,33 @@ label {
       const db = getFirestore();
       const ordersCollection = collection(db, 'orders');
       const paymentsCollection = collection(db, 'payments');
-
-      // Add order data
+  
+      // Create a new order
       const orderData = {
         userId: auth.currentUser.uid,
         books: books,
         timestamp: serverTimestamp(),
       };
-
+  
+      // Add the order to the 'orders' collection
       const orderRef = await addDoc(ordersCollection, orderData);
-
-      // Add payment data
+  
+      // Create a new payment
       const paymentData = {
-        orderId: orderRef.id,
+        orderId: orderRef.id, // Use the ID of the newly added order
+        userId: auth.currentUser.uid,
         cardNumber: selectedCard.cardNumber,
-        amount: totalFee,
+        amount: totalFee.toFixed(2),
         timestamp: serverTimestamp(),
       };
-
+  
+      // Add the payment to the 'payments' collection
       await addDoc(paymentsCollection, paymentData);
-
-      console.log('Order and payment successfully added to Firebase');
+  
+      console.log('Order and Payment successfully added to Firebase');
+  
     } catch (error) {
-      console.error('Error adding order and payment to Firebase: ', error);
+      console.error('Error adding Order and Payment to Firebase: ', error);
     }
   };
 
