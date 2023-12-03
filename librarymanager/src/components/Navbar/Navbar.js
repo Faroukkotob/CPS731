@@ -23,7 +23,6 @@ const Navbar = () => {
 
   return (
     <aside className="sidebar">
-<<<<<<< HEAD
       <div className="sidebar-header">
         <h1>Library</h1>
       </div>
@@ -40,24 +39,6 @@ const Navbar = () => {
             className="search-input"
           />
         </form>
-=======
-      <div className="sidebar-section">
-        <button className="sidebar-item">Library</button>
-        <div className="search-container">
-          <form className="search-bar">
-            <input type="search" placeholder="Search books..." />
-            <button type="submit">🔍</button>
-          </form>
-        </div>
-        <button className="sidebar-item active">Dashboard</button>
-        <button className="sidebar-item">Reading List</button>
-        <button className="sidebar-item"><Link to="/libraryManager" className="link-style">Manage Inventory (staff)</Link></button>
-        <button className="sidebar-item"><Link to="/checkout" className="link-style">Checkout</Link></button>
-<<<<<<< Updated upstream
->>>>>>> ead1c4674644f5e94aa748d34dfcbe284a1b0ecf
-=======
-        <button className="sidebar-item"><Link to="/orders" className="link-style">Orders</Link></button>
->>>>>>> Stashed changes
       </div>
       <div className="sidebar-section">
         <button className="sidebar-item active">
