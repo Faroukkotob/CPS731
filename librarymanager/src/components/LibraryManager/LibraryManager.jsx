@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import './LibraryManager.css';
 import Navbar from "../Navbar/Navbar";
-import Carousel from "react-multi-carousel";
-import "react-multi-carousel/lib/styles.css";
+import useEmblaCarousel from 'embla-carousel-react'
+import Autoplay from 'embla-carousel-autoplay'
 
 const AddBookForm = ({ onAddBook }) => {
   const [title, setTitle] = useState('');
@@ -66,41 +66,30 @@ const responsive = {
   }
 };
 
-const BookCarousel = ({ books }) => (
-  <div className="carousel">
-    <Carousel 
-    swipeable={false}
-    draggable={false}
-    showDots={true}
-    responsive={responsive}
-    ssr={true} // means to render carousel on server-side.
-    infinite={true}
-    autoPlay={this.props.deviceType !== "mobile" ? true : false}
-    autoPlaySpeed={1000}
-    keyBoardControl={true}
-    customTransition="all .5"
-    transitionDuration={500}
-    containerClass="carousel-container"
-    removeArrowOnDeviceType={["tablet", "mobile"]}
-    deviceType={this.props.deviceType}
-    dotListClass="custom-dot-list-style"
-    itemClass="carousel-item-padding-40-px"> {
-      books.map(book => (
-        <div className="book" key={book.id}>
-          {book.pictures.map((picture, index) => (
-            <img key={index} src={picture} alt={`${book.title} - ${index + 1}`} />
-          ))}
-          <h3>{book.title}</h3>
-          <p>{book.author}</p>
-          <p>ISBN: {book.isbn}</p>
-          <p>{book.description}</p>
-        </div>
-      ))
-          }
-    </Carousel>;
+const BookCarousel = ({ books }) => {
+    const [emblaRef] = useEmblaCarousel({slidesToScroll: 3})
+    var booksRenders = books.map(book => (
+      <div className="embla__slide">
+      <div className="book" key={book.id}>
+        {book.pictures.map((picture, index) => (
+          <img key={index} src={picture} alt={`${book.title} - ${index + 1}`} />
+        ))}
+        <h3>{book.title}</h3>
+        <p>{book.author}</p>
+        <p>ISBN: {book.isbn}</p>
+        <p>{book.description}</p>
+      </div>
+      </div>
+    ))
+    return(
+      
+    <div className="embla" ref={emblaRef}>
+      <div className="embla__container"> {
+        booksRenders
+      }
+      </div>
     </div>
-    
-)
+)}
 
 const LibraryManager = () => {
   const [books, setBooks] = useState([]);

@@ -94,13 +94,24 @@
     cursor: pointer;
 }
 
-/* Book Carousel Styles 
+/* Book Carousel Styles */
+.embla {
+    overflow: hidden;
+  }
+  .embla__container {
+    display: flex;
+  }
+  .embla__slide {
+    flex: 0 0 30%;
+    min-width: 0;
+  }
+
 .carousel {
     display: flex;
     overflow-x: auto;
     gap: 10px;
 }
-*/
+
 .book {
     margin: 0 10px;
     flex: 0 0 auto;
