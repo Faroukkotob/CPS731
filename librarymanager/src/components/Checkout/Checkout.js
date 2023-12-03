@@ -3,6 +3,10 @@ import { Link } from 'react-router-dom';
 import '../LibraryManager/LibraryManager.css';
 import Navbar from "../Navbar/Navbar"
 import { useNavigate } from "react-router-dom";
+import { getFirestore, collection, addDoc, serverTimestamp } from 'firebase/firestore';
+import { auth } from "../Auth/Auth";
+
+
 
 
 
@@ -179,6 +183,31 @@ label {
   const payFines = () => {
     // Logic for handling payment, e.g., redirect to a payment gateway
     alert(`Total Fee: $${totalFee.toFixed(2)} - Payment Successful`);
+    sendOrderToFirebase();
+  };
+
+  const clearTableContent = () => {
+    setBooks([]);
+  };
+
+  const sendOrderToFirebase = async () => {
+    try {
+      const db = getFirestore();
+      const ordersCollection = collection(db, 'orders');
+
+      const orderData = {
+        userId: auth.currentUser.uid,
+        books: books,
+        timestamp: serverTimestamp(),
+      };
+  
+      await addDoc(ordersCollection, orderData);
+
+      console.log('Order successfully added to Firebase');
+  
+    } catch (error) {
+      console.error('Error adding order to Firebase: ', error);
+    }
   };
 
 
@@ -301,7 +330,7 @@ label {
             </table>
             <div className="total-fee-section">
               <p>Total Fee: ${totalFee.toFixed(2)}</p>
-              <button onClick={payFines} className="pay-fines-button">Pay Fines</button>
+              <button onClick={() => { payFines(); clearTableContent(); }} className="pay-fines-button">Pay Fines</button>
             </div>
           </div>
         </div>

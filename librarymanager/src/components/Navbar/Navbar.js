@@ -16,6 +16,7 @@ const Navbar = () => (
         <button className="sidebar-item active">Dashboard</button>
         <button className="sidebar-item">Reading List</button>
         <button className="sidebar-item"><Link to="/libraryManager" className="link-style">Manage Inventory (staff)</Link></button>
+        <button className="sidebar-item"><Link to="/checkout" className="link-style">Checkout</Link></button>
       </div>
       <div className="sidebar-section">
         <button className="sidebar-item">
