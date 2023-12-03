@@ -35,7 +35,7 @@ const Auth = () => {
             <button className="sidebar-item"><Link to="/login" className="link-style">Login</Link></button>
         </> :
             <>
-            <button className="sidebar-item" onClick={userSignOut}><Link to="/signup" className="link-style">Logout</Link></button>
+            <button className="sidebar-item" onClick={userSignOut}><Link to="/login" className="link-style">Logout</Link></button>
 </>
             }
         </>
