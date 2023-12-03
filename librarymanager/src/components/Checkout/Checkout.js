@@ -173,17 +173,40 @@ label {
     setCards(updatedCards);
   };
   const [books, setBooks] = useState([
-    { author: 'Martin', title: 'HTMl', due: 'May 24', price: '25.2$' },
-    { author: 'Adam C', title: 'CSS', due: 'Feb 24', price: '12.5$' },
+    { author: 'tala', title: 'mth', due: 'mar 24', price: '131.2$' },
+    { author: 'maya', title: 'elc', due: 'DEC 24', price: '121.5$' },
     // Add more books as needed
   ]);
 
   const totalFee = books.reduce((acc, book) => acc + parseFloat(book.price), 0);
-
+  /*
   const payFines = () => {
     // Logic for handling payment, e.g., redirect to a payment gateway
     alert(`Total Fee: $${totalFee.toFixed(2)} - Payment Successful`);
     sendOrderToFirebase();
+  };*/
+  const [selectedCard, setSelectedCard] = useState(null);
+
+  const handleCardSelection = (card) => {
+    setSelectedCard(card);
+  };
+
+
+  const payFines = () => {
+    if (!selectedCard) {
+      alert('Please select a card before paying.');
+      return;
+    }
+  
+    if (totalFee === 0) {
+      alert('Total Fee is zero. No payment required.');
+      return;
+    }
+  
+    // Logic for handling payment, e.g., redirect to a payment gateway
+    alert(`Total Fee: $${totalFee.toFixed(2)} - Payment Successful with Card: ${selectedCard.cardNumber}`);
+    sendOrderAndPaymentToFirebase();
+    setBooks([]);
   };
 
   const clearTableContent = () => {
@@ -210,6 +233,37 @@ label {
     }
   };
 
+  const sendOrderAndPaymentToFirebase = async () => {
+    try {
+      const db = getFirestore();
+      const ordersCollection = collection(db, 'orders');
+      const paymentsCollection = collection(db, 'payments');
+
+      // Add order data
+      const orderData = {
+        userId: auth.currentUser.uid,
+        books: books,
+        timestamp: serverTimestamp(),
+      };
+
+      const orderRef = await addDoc(ordersCollection, orderData);
+
+      // Add payment data
+      const paymentData = {
+        orderId: orderRef.id,
+        cardNumber: selectedCard.cardNumber,
+        amount: totalFee,
+        timestamp: serverTimestamp(),
+      };
+
+      await addDoc(paymentsCollection, paymentData);
+
+      console.log('Order and payment successfully added to Firebase');
+    } catch (error) {
+      console.error('Error adding order and payment to Firebase: ', error);
+    }
+  };
+
 
   return (
     <>
@@ -227,6 +281,7 @@ label {
             <table>
               <thead>
                 <tr>
+                  <th></th>
                   <th>Card Number</th>
                   <th>Bank</th>
                   <th>Name</th>
@@ -237,6 +292,14 @@ label {
               <tbody>
                 {cards.map((card, index) => (
                   <tr key={index}>
+                     <td>
+                      <input
+                        type="radio"
+                        name="cardSelection"
+                        checked={selectedCard === card}
+                        onChange={() => handleCardSelection(card)}
+                      />
+                    </td>
                     <td>{card.cardNumber}</td>
                     <td>{card.bank}</td>
                     <td>{card.name}</td>
@@ -330,7 +393,7 @@ label {
             </table>
             <div className="total-fee-section">
               <p>Total Fee: ${totalFee.toFixed(2)}</p>
-              <button onClick={() => { payFines(); clearTableContent(); }} className="pay-fines-button">Pay Fines</button>
+              <button onClick={() => { payFines();}} className="pay-fines-button">Pay Fines</button>
             </div>
           </div>
         </div>
