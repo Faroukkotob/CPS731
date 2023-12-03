@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import '../LibraryManager/LibraryManager.css';
-import Navbar from "../Navbar/Navbar"
+import Navbar from "../Navbar/Navbar";
 import { useNavigate } from "react-router-dom";
 import { getFirestore, collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import { auth } from "../Auth/Auth";
@@ -173,8 +173,8 @@ label {
     setCards(updatedCards);
   };
   const [books, setBooks] = useState([
-    { author: 'Author1', title: 'Book1', due: 'Due1', price: '10.0$' },
-    { author: 'Author2', title: 'Book2', due: 'Due2', price: '32.5$' },
+    { author: 'Martin', title: 'HTMl', due: 'May 24', price: '25.2$' },
+    { author: 'Adam C', title: 'CSS', due: 'Feb 24', price: '12.5$' },
     // Add more books as needed
   ]);
 
