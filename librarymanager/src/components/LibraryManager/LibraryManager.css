@@ -23,7 +23,7 @@
     background: #D9D9D9;
     padding: 10px;
     height: 100vh;
-    box-sizing: border-box; /* Ensures padding is included in the width */
+    box-sizing: border-box; 
     position: fixed;
     top: 0;
     bottom: 0;
@@ -49,47 +49,47 @@
     letter-spacing: 0.14px;
     word-wrap: break-word;
     margin-bottom: 12px;
-    background-color: white; /* Default white background */
+    background-color: white; 
     border: none;
     text-align: left;
-    padding: 10px 15px; /* Adjusted padding for visual balance */
+    padding: 10px 15px; 
     cursor: pointer;
     display: flex;
     align-items: center;
-    justify-content: flex-start; /* Align items to the start of the container */
-    border-radius: 4px; /* Rounded corners for the buttons */
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Subtle shadow for depth */
-    transition: background-color 0.3s; /* Smooth transition for background color change */
-    width: calc(100% - 30px); /* Ensure buttons are full width minus padding */
-    box-sizing: border-box; /* Ensures padding is included in the width and height */
-    height: 50px; /* Fixed height for all buttons */
-    text-decoration: none; /* Ensure links do not have underline */
+    justify-content: flex-start; 
+    border-radius: 4px; 
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); 
+    transition: background-color 0.3s; 
+    width: calc(100% - 30px); 
+    box-sizing: border-box; 
+    height: 50px; 
+    text-decoration: none; 
 }
 
 /* Icon styling within sidebar items */
 .sidebar-item img, .sidebar-item button img, .link-style img {
-    width: 20px; /* Adjust the size of your icons as needed */
-    height: 20px; /* Adjust the size of your icons as needed */
-    margin-right: 8px; /* Space between the icon and text */
-    vertical-align: middle; /* Align the icon vertically with the text */
+    width: 20px; 
+    height: 20px; 
+    margin-right: 8px; 
+    vertical-align: middle; 
 }
 
 /* Hover effect for sidebar item/button */
 .sidebar-item:hover, .sidebar-item button:hover, .link-style:hover {
-    background-color: #f0f0f0; /* Slightly darker background on hover */
+    background-color: #f0f0f0; 
 }
 
 /* Active item/button styling */
 .sidebar-item.active, .sidebar-item button.active, .link-style.active {
-    background-color: #B0B0B0; /* Grey background for active state */
-    color: white; /* Change text color for active state */
-    box-shadow: none; /* Remove shadow on active state */
+    background-color: #B0B0B0; 
+    color: white; 
+    box-shadow: none; 
 }
 
 /* Search container styling */
 .search-container {
     margin-bottom: 20px;
-    position: relative; /* Set the position to relative for absolute positioning of icon */
+    position: relative; 
 }
 
 /* Search bar styling */
@@ -101,21 +101,21 @@
 
 .search-bar input[type="search"] {
     flex-grow: 1;
-    padding: 10px 10px 10px 35px; /* Adjust left padding to make room for the icon */
+    padding: 10px 10px 10px 35px; 
     border: 1px solid #ccc;
     border-radius: 4px;
 }
 
 .search-bar button {
     position: absolute;
-    left: 10px; /* Position the search icon inside the input on the left */
+    left: 10px; 
     top: 50%;
     transform: translateY(-50%);
     background: none;
     border: none;
     padding: 0;
     cursor: pointer;
-    color: black; /* Set the color of the search icon */
+    color: black; 
 }
 
 /* Book Carousel Styles */
@@ -205,9 +205,9 @@
     }
 
     .sidebar-item, .sidebar-item button, .link-style {
-        width: auto; /* On smaller screens, buttons take the width of their container */
-        padding-left: 15px; /* Adjust left padding to match the sidebar padding */
-        padding-right: 15px; /* Adjust right padding to match the sidebar padding */
-        height: auto; /* Allow the height to adjust to content */
+        width: auto; 
+        padding-left: 15px; 
+        padding-right: 15px; 
+        height: auto; 
     }
 }

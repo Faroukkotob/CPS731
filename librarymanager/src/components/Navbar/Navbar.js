@@ -5,13 +5,14 @@ import dashboardIcon from './dashboard.jpg';
 import readingListIcon from './books.jpg';
 import manageInventoryIcon from './books.jpg';
 import profileIcon from './profile.jpg';
-import logoutIcon from './logout.jpg';
+import loginIcon from './login.jpg'; 
 import searchIcon from './Search.jpg';
-import Auth from '../Auth/Auth';
+import Auth from '../Auth/Auth'; 
 
 const Navbar = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const navigate = useNavigate();
+  const [isLoggedIn, setIsLoggedIn] = useState(false); 
 
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
@@ -60,7 +61,7 @@ const Navbar = () => {
         <Link to="/orders" className="sidebar-item link-style">
           <img src={profileIcon} alt="Manage Inventory" className="sidebar-icon" /> Orders
         </Link>
-        <Auth />
+        <Auth isLoggedIn={isLoggedIn} loginIcon={loginIcon} />
       </div>
     </aside>
   );

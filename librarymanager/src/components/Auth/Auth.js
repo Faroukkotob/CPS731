@@ -1,49 +1,43 @@
 import React, { useEffect, useState } from 'react';
-import { auth, app } from "../../firebase";
-import '../LibraryManager/LibraryManager.css';
-import Navbar from "../Navbar/Navbar";
-import { onAuthStateChanged , signOut} from "firebase/auth";
-import {Link} from "react-router-dom";
+import { auth } from "../../firebase";
+import { onAuthStateChanged, signOut } from "firebase/auth";
+import { Link, useNavigate } from "react-router-dom";
+import loginIcon from './login.jpg'; 
 
 const Auth = () => {
-    const [authenticatedUser, setauthenticatedUser] = useState("");
+    const [authenticatedUser, setAuthenticatedUser] = useState(null);
+    const navigate = useNavigate();
 
-    useEffect( () => {
-        const listenAuth = onAuthStateChanged(auth, (user) =>{
-            if (user){
-                setauthenticatedUser(user)
-            }else {
-                setauthenticatedUser(null)
-            }
-        }
-        )
-        return () => {
-            listenAuth();
-
-        }
-    },[])
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, (user) => {
+            setAuthenticatedUser(user);
+        });
+        return unsubscribe; 
+    }, []);
 
     const userSignOut = () => {
-        signOut(auth).then(()=>{
-            console.log("user signed out")
-        }).catch(error => console.log("error"))
-    }
-    return (
-        <>
-        {authenticatedUser === null ? 
-        <>
-            <button className="sidebar-item"><Link to="/login" className="link-style">Login</Link></button>
-        </> :
-            <>
-            <button className="sidebar-item" onClick={userSignOut}><Link to="/login" className="link-style">Logout</Link></button>
-</>
-            }
-        </>
-    )
+        signOut(auth).then(() => {
+            console.log("User signed out");
+            navigate('/'); 
+        }).catch(error => {
+            console.log("Sign out error", error);
+        });
     };
 
-  export default Auth;
-  export { auth, onAuthStateChanged, signOut };
+    return (
+        <div>
+            {authenticatedUser === null ? (
+                <Link to="/login" className="sidebar-item link-style">
+                    <img src={loginIcon} alt="Login" className="sidebar-icon" />
+                    Login
+                </Link>
+            ) : (
+                <button className="sidebar-item" onClick={userSignOut}>
+                    Logout
+                </button>
+            )}
+        </div>
+    );
+};
 
-  //                    <button className="sidebar-item">Logout</button>
-
+export default Auth;
