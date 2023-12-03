@@ -1,3 +1,5 @@
+/* LibraryManager.css */
+
 .library-manager {
     display: flex;
     min-height: 100vh;
@@ -21,77 +23,99 @@
     background: #D9D9D9;
     padding: 10px;
     height: 100vh;
-    box-sizing: border-box;
+    box-sizing: border-box; /* Ensures padding is included in the width */
     position: fixed;
     top: 0;
     bottom: 0;
     overflow-y: auto;
 }
 
+.sidebar-header {
+    padding: 1rem;
+    background-color: #F5F5F5;
+    text-align: center;
+}
+
 .sidebar-section {
     margin-bottom: 20px;
 }
 
-.sidebar-item, .sidebar-item button {
+.sidebar-item, .sidebar-item button, .link-style {
     color: black;
     font-size: 14px;
-    font-family: 'Inter';
+    font-family: 'Inter', sans-serif;
     font-weight: 400;
     line-height: 19.60px;
     letter-spacing: 0.14px;
     word-wrap: break-word;
     margin-bottom: 12px;
-    background: none;
+    background-color: white; /* Default white background */
     border: none;
     text-align: left;
-    width: 100%;
-    padding: 10px 0;
+    padding: 10px 15px; /* Adjusted padding for visual balance */
     cursor: pointer;
-    display: block;
-    text-align: left;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.sidebar-item.active, .sidebar-item button.active {
-    font-weight: 600;
-    color: black;
-}
-
-.sidebar-item button:hover, .sidebar-item button:focus {
-    background: #B0B0B0;
-}
-
-.sidebar-item button {
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
     display: flex;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: flex-start; /* Align items to the start of the container */
+    border-radius: 4px; /* Rounded corners for the buttons */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Subtle shadow for depth */
+    transition: background-color 0.3s; /* Smooth transition for background color change */
+    width: calc(100% - 30px); /* Ensure buttons are full width minus padding */
+    box-sizing: border-box; /* Ensures padding is included in the width and height */
+    height: 50px; /* Fixed height for all buttons */
+    text-decoration: none; /* Ensure links do not have underline */
 }
 
+/* Icon styling within sidebar items */
+.sidebar-item img, .sidebar-item button img, .link-style img {
+    width: 20px; /* Adjust the size of your icons as needed */
+    height: 20px; /* Adjust the size of your icons as needed */
+    margin-right: 8px; /* Space between the icon and text */
+    vertical-align: middle; /* Align the icon vertically with the text */
+}
+
+/* Hover effect for sidebar item/button */
+.sidebar-item:hover, .sidebar-item button:hover, .link-style:hover {
+    background-color: #f0f0f0; /* Slightly darker background on hover */
+}
+
+/* Active item/button styling */
+.sidebar-item.active, .sidebar-item button.active, .link-style.active {
+    background-color: #B0B0B0; /* Grey background for active state */
+    color: white; /* Change text color for active state */
+    box-shadow: none; /* Remove shadow on active state */
+}
+
+/* Search container styling */
 .search-container {
-    margin-bottom: 12px;
+    margin-bottom: 20px;
+    position: relative; /* Set the position to relative for absolute positioning of icon */
 }
 
+/* Search bar styling */
 .search-bar {
     display: flex;
+    align-items: center;
     margin-bottom: 1rem;
 }
 
-.search-bar input {
-    margin-right: 0.5rem;
+.search-bar input[type="search"] {
     flex-grow: 1;
+    padding: 10px 10px 10px 35px; /* Adjust left padding to make room for the icon */
+    border: 1px solid #ccc;
+    border-radius: 4px;
 }
 
 .search-bar button {
-    background-color: #007BFF;
-    color: white;
+    position: absolute;
+    left: 10px; /* Position the search icon inside the input on the left */
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
     border: none;
-    padding: 0.5rem;
+    padding: 0;
     cursor: pointer;
+    color: black; /* Set the color of the search icon */
 }
 
 /* Book Carousel Styles */
@@ -105,22 +129,23 @@
     margin: 0 10px;
     flex: 0 0 auto;
     text-align: center;
-    width: 200px; /* Adjust width as needed */
-    height: auto; /* Height is auto to adjust to content */
+    width: 200px;
+    height: auto;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    background: #F5F5F5; /* Optional: Adds a background color to each book container */
-    padding: 10px; /* Optional: Adds some padding inside the book containers */
-    border-radius: 4px; /* Optional: Rounds the corners of the book containers */
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Optional: Adds a subtle shadow to each book container */
+    background: #F5F5F5;
+    padding: 10px;
+    border-radius: 4px;
+    box-shadow: 0 4px 8
+    px rgba(0,0,0,0.1);
 }
 
 .book img {
-    width: 100%; /* Ensures image width is 100% of the container */
-    height: auto; /* Ensures the image height scales proportionally */
-    object-fit: contain; /* Ensures the image fits within the container without being cropped */
-    margin-bottom: 10px; /* Adds some space between the image and the text below */
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    margin-bottom: 10px;
 }
 
 /* Add Book Form Styles */
@@ -132,7 +157,7 @@
     margin-bottom: 1rem;
     width: 100%;
     padding: 0.5rem;
-    box-sizing: border-box; /* Ensures padding does not affect the overall width */
+    box-sizing: border-box;
 }
 
 .add-book-form button {
@@ -147,6 +172,7 @@
 .library-footer {
     padding: 1rem;
     background-color: #F5F5F5;
+    text-align: center;
 }
 
 /* Additional Link Styles */
@@ -155,7 +181,22 @@
     color: inherit;
 }
 
-.sidebar-item button:focus {
-    outline: 2px solid #007BFF;
-    outline-offset: 2px;
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+    }
+
+    .main-content {
+        margin-left: 0;
+    }
+
+    .sidebar-item, .sidebar-item button, .link-style {
+        width: auto; /* On smaller screens, buttons take the width of their container */
+        padding-left: 15px; /* Adjust left padding to match the sidebar padding */
+        padding-right: 15px; /* Adjust right padding to match the sidebar padding */
+        height: auto; /* Allow the height to adjust to content */
+    }
 }
