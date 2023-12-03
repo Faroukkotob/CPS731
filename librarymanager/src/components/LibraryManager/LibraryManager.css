@@ -94,13 +94,13 @@
     cursor: pointer;
 }
 
-/* Book Carousel Styles */
+/* Book Carousel Styles 
 .carousel {
     display: flex;
     overflow-x: auto;
     gap: 10px;
 }
-
+*/
 .book {
     margin: 0 10px;
     flex: 0 0 auto;

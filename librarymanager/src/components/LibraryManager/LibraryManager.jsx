@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import './LibraryManager.css';
 import Navbar from "../Navbar/Navbar";
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
 
 const AddBookForm = ({ onAddBook }) => {
   const [title, setTitle] = useState('');
   const [author, setAuthor] = useState('');
   const [isbn, setIsbn] = useState('');
+  const [genre, setGenre] = useState('');
   const [pictures, setPictures] = useState('');
   const [description, setDescription] = useState('');
 
@@ -17,12 +20,14 @@ const AddBookForm = ({ onAddBook }) => {
       title, 
       author, 
       isbn, 
+      genre,
       pictures: pictureArray, 
       description 
     });
     setTitle('');
     setAuthor('');
     setIsbn('');
+    setGenre('');
     setPictures('');
     setDescription('');
   };
@@ -32,6 +37,7 @@ const AddBookForm = ({ onAddBook }) => {
       <input type="text" value={title} onChange={e => setTitle(e.target.value)} placeholder="Title" required />
       <input type="text" value={author} onChange={e => setAuthor(e.target.value)} placeholder="Author" required />
       <input type="text" value={isbn} onChange={e => setIsbn(e.target.value)} placeholder="ISBN" required />
+      <input type="text" value={genre} onChange={e => setGenre(e.target.value)} placeholder="Genre" required />
       <textarea value={pictures} onChange={e => setPictures(e.target.value)} placeholder="Picture URLs (one per line)" required />
       <textarea value={description} onChange={e => setDescription(e.target.value)} placeholder="Book Description" required />
       <button type="submit">Add Book</button>
@@ -39,29 +45,67 @@ const AddBookForm = ({ onAddBook }) => {
   );
 };
 
+
+const responsive = {
+  superLargeDesktop: {
+    // the naming can be any, depends on you.
+    breakpoint: { max: 4000, min: 3000 },
+    items: 5
+  },
+  desktop: {
+    breakpoint: { max: 3000, min: 1024 },
+    items: 3
+  },
+  tablet: {
+    breakpoint: { max: 1024, min: 464 },
+    items: 2
+  },
+  mobile: {
+    breakpoint: { max: 464, min: 0 },
+    items: 1
+  }
+};
+
 const BookCarousel = ({ books }) => (
   <div className="carousel">
-    {books.map(book => (
-      <div className="book" key={book.id}>
-        {book.pictures.map((picture, index) => (
-          <img key={index} src={picture} alt={`${book.title} - ${index + 1}`} />
-        ))}
-        <h3>{book.title}</h3>
-        <p>{book.author}</p>
-        <p>ISBN: {book.isbn}</p>
-        <p>{book.description}</p>
-      </div>
-    ))}
-  </div>
-);
+    <Carousel responsive={responsive}> {
+      books.map(book => (
+        <div className="book" key={book.id}>
+          {book.pictures.map((picture, index) => (
+            <img key={index} src={picture} alt={`${book.title} - ${index + 1}`} />
+          ))}
+          <h3>{book.title}</h3>
+          <p>{book.author}</p>
+          <p>ISBN: {book.isbn}</p>
+          <p>{book.description}</p>
+        </div>
+      ))
+      }
+    </Carousel>;
+    </div>
+    
+)
 
 const LibraryManager = () => {
   const [books, setBooks] = useState([]);
 
   useEffect(() => {
-    const savedBooks = JSON.parse(localStorage.getItem('books'));
+    var savedBooks = JSON.parse(localStorage.getItem('books'));
+    console.log(savedBooks);
+    const preloadBooks = require("../../preloaded_books/preloaded_book_info.json");
+    console.log(preloadBooks);
     if (savedBooks) {
+      for (var preloadedBookId in preloadBooks) {
+        console.log("iterating on book:");
+        if(!savedBooks.includes(preloadBooks[preloadedBookId])) {
+          savedBooks.push(preloadBooks[preloadedBookId]);
+        }
+      }
+      console.log("books after iteration");
+      console.log(savedBooks);
       setBooks(savedBooks);
+    } else {
+      setBooks(preloadBooks);
     }
   }, []);
 
