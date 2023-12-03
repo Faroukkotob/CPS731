@@ -46,3 +46,4 @@ const Auth = () => {
   export { auth, onAuthStateChanged, signOut };
 
   //                    <button className="sidebar-item">Logout</button>
+
