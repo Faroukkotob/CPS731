@@ -1,11 +1,11 @@
 [
     {
         "id": "0",
-        "title": "Last Hope",
-        "isbn": "0593156986",
-        "author": "James Lopez",
-        "genre": "Non-Fiction",
-        "pictures": ["../../preloaded_books/covers/2.png"],
+        "title": "American Psycho",
+        "isbn": "9780307278630",
+        "author": "Brett Ellis",
+        "genre": "Horror",
+        "pictures": ["https://s26162.pcdn.co/wp-content/uploads/2018/05/american-psycho-670x1024.jpg"],
         "description": ""
     },
     {
@@ -14,7 +14,7 @@
         "isbn": "9780545010221",
         "author": "JK Rowling",
         "genre": "Fantasy",
-        "pictures": ["../../preloaded_books/covers/1.png"],
+        "pictures": ["https://m.media-amazon.com/images/I/61ItOr+01UL._AC_UF894,1000_QL80_.jpg"],
         "description": ""
     },
     {
@@ -23,7 +23,25 @@
         "isbn": "9780331928389",
         "author": "Megan Campisi",
         "genre": "Historical Fiction",
-        "pictures": ["../../preloaded_books/covers/2.png"],
+        "pictures": ["https://d28hgpri8am2if.cloudfront.net/book_images/onix/cvr9781982124113/sin-eater-9781982124113_hr.jpg"],
+        "description": ""
+    },
+    {
+        "id": "3",
+        "title": "The Hobbit",
+        "isbn": "9780007525508",
+        "author": "JRR Tolkein",
+        "genre": "Fantasy",
+        "pictures": ["https://www.creatopy.com/blog/wp-content/uploads/2020/08/The-Hobbit-Book-Cover-441x600.jpg"],
+        "description": ""
+    },
+    {
+        "id": "4",
+        "title": "Atlas Shrugged",
+        "isbn": "9780451191144",
+        "author": "Ayn Rand",
+        "genre": "Science Fiction",
+        "pictures": ["https://img.huffingtonpost.com/asset/5bb62168260000360082ecc1.jpeg?ops=scalefit_720_noupscale"],
         "description": ""
     }
 ]
