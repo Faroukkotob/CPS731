@@ -61,7 +61,7 @@ const Navbar = () => {
           <img src={profileIcon} alt="Manage Inventory" className="sidebar-icon" /> Checkout
         </Link>
         <Link to="/orders" className="sidebar-item link-style">
-          <img src={profileIcon} alt="Manage Inventory" className="sidebar-icon" /> Orders
+          <img src={profileIcon} alt="Manage Inventory" className="sidebar-icon" /> Your Orders
         </Link>
         <Auth isLoggedIn={isLoggedIn} loginIcon={loginIcon} />
       </div>
