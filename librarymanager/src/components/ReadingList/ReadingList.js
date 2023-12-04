@@ -34,7 +34,7 @@ const columns = [
     { field: 'isbn', headerName: 'Last name', width: 200 },
     { field: 'author', headerName: 'Author', width: 200 },
     { field: 'genre', headerName: 'Genre', width: 200 },
-    { field: 'price', headerName: 'Price', width: 200 }
+    { field: 'price ($)', headerName: 'Price', width: 200 }
 ];
 
 var readingListSelected = new Set();
