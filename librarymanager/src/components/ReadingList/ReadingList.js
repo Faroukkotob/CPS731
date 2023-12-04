@@ -28,15 +28,14 @@ function getReadingListBooks() {
     return JSON.parse(localStorage.getItem('readingListBooks'));
 }
 
-function getColumns() {
-  return [
+const columns = [
     { field: 'id', headerName: 'ID', width: 70 },
     { field: 'title', headerName: 'Title', width: 200 },
     { field: 'isbn', headerName: 'Last name', width: 200 },
     { field: 'author', headerName: 'Author', width: 200 },
-    { field: 'genre', headerName: 'Genre', width: 200 }
-  ];
-}
+    { field: 'genre', headerName: 'Genre', width: 200 },
+    { field: 'price', headerName: 'Price', width: 200 }
+];
 
 var readingListSelected = new Set();
 var catalogueSelected = new Set();
@@ -50,7 +49,7 @@ const ReadingList = () => {
     var bookCatalogue = getCatalogue();
     for (var bookIdCatalogue in bookCatalogue) {
         const thisBook = bookCatalogue[bookIdCatalogue];
-        catalogueRows = [...catalogueRows, {id: thisBook.id, title: thisBook.title, isbn: thisBook.isbn, author: thisBook.author, genre: thisBook.genre}];
+        catalogueRows = [...catalogueRows, {id: thisBook.id, title: thisBook.title, isbn: thisBook.isbn, author: thisBook.author, genre: thisBook.genre, price:thisBook.price}];
     }
   
     function onCatalogueSelectionModelChange(ids) {
@@ -61,7 +60,7 @@ const ReadingList = () => {
     var catalogueTable = (<DataGrid
         rows={catalogueRows}
         onRowSelectionModelChange={(ids) => onCatalogueSelectionModelChange(ids)}
-        columns={getColumns()}
+        columns={columns}
         initialState={{
         pagination: {
         paginationModel: { page: 0, pageSize: 5 },
@@ -74,7 +73,7 @@ const ReadingList = () => {
     var readingListBooks = getReadingListBooks();
     for (var bookIdReadingList in readingListBooks) {
         const thisBook = bookCatalogue[bookIdReadingList];
-        readingListRows = [...readingListRows, {id: thisBook.id, title: thisBook.title, isbn: thisBook.isbn, author: thisBook.author, genre: thisBook.genre}];
+        readingListRows = [...readingListRows, {id: thisBook.id, title: thisBook.title, isbn: thisBook.isbn, author: thisBook.author, genre: thisBook.genre, price: thisBook.price}]
     }
     
     function onReadingListSelectionModelChange(ids) {
@@ -85,7 +84,7 @@ const ReadingList = () => {
     var readingListTable = (<DataGrid
         rows={readingListRows}
         onRowSelectionModelChange={(ids) => onReadingListSelectionModelChange(ids)}
-        columns={getColumns()}
+        columns={columns}
         initialState={{
         pagination: {
         paginationModel: { page: 0, pageSize: 5 },
