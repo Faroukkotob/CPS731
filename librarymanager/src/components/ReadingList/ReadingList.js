@@ -6,7 +6,7 @@ import '@fontsource/roboto/700.css';
 
 import Navbar from "../Navbar/Navbar";
 import React from "react";
-import { DataGrid, useGridApiContext } from '@mui/x-data-grid';
+import { DataGrid } from '@mui/x-data-grid';
 import { Button } from '@mui/material';
 
 function getCatalogue() {
@@ -28,72 +28,103 @@ function getReadingListBooks() {
     return JSON.parse(localStorage.getItem('readingListBooks'));
 }
 
-const columns = [
+function getColumns() {
+  return [
     { field: 'id', headerName: 'ID', width: 70 },
     { field: 'title', headerName: 'Title', width: 200 },
     { field: 'isbn', headerName: 'Last name', width: 200 },
     { field: 'author', headerName: 'Author', width: 200 },
     { field: 'genre', headerName: 'Genre', width: 200 }
-];
+  ];
+}
+
+var readingListSelected = new Set();
+var catalogueSelected = new Set();
+
 
 const ReadingList = () => {
-    
+  
+    var [catalogueRows,setCatalogueRows] = React.useState([]);
+    var [readingListRows, setReadingListRows] = React.useState([]);
+
     var bookCatalogue = getCatalogue();
-    var catalogueRows = [];
     for (var bookIdCatalogue in bookCatalogue) {
         const thisBook = bookCatalogue[bookIdCatalogue];
-        catalogueRows.push({id: thisBook.id, title: thisBook.title, isbn: thisBook.isbn, author: thisBook.author, genre: thisBook.genre});
+        catalogueRows = [...catalogueRows, {id: thisBook.id, title: thisBook.title, isbn: thisBook.isbn, author: thisBook.author, genre: thisBook.genre}];
     }
-    
-    //var catalogueTableRef = useGridApiContext();
+  
+    function onCatalogueSelectionModelChange(ids) {
+      catalogueSelected = new Set(ids);
+      console.log(catalogueSelected);
+    }
+
     var catalogueTable = (<DataGrid
         rows={catalogueRows}
-        columns={columns}
+        onRowSelectionModelChange={(ids) => onCatalogueSelectionModelChange(ids)}
+        columns={getColumns()}
         initialState={{
         pagination: {
         paginationModel: { page: 0, pageSize: 5 },
         },
         }}
+        getRowId={(row) => row.id}
         pageSizeOptions={[5, 10]}
         checkboxSelection
     />);
     var readingListBooks = getReadingListBooks();
-    var readingListRows = [];
     for (var bookIdReadingList in readingListBooks) {
         const thisBook = bookCatalogue[bookIdReadingList];
-        readingListRows.push({id: thisBook.id, title: thisBook.title, isbn: thisBook.isbn, author: thisBook.author, genre: thisBook.genre});
+        readingListRows = [...readingListRows, {id: thisBook.id, title: thisBook.title, isbn: thisBook.isbn, author: thisBook.author, genre: thisBook.genre}];
     }
     
-   // var readingTableRef = useGridApiContext();
+    function onReadingListSelectionModelChange(ids) {
+      readingListSelected = new Set(ids);
+      console.log(catalogueSelected);
+    }
+
     var readingListTable = (<DataGrid
         rows={readingListRows}
-        columns={columns}
+        onRowSelectionModelChange={(ids) => onReadingListSelectionModelChange(ids)}
+        columns={getColumns()}
         initialState={{
         pagination: {
         paginationModel: { page: 0, pageSize: 5 },
         },
         }}
+        getRowId={(row) => row.id}
         pageSizeOptions={[5, 10]}
         checkboxSelection
+        
     />
     );
     return (
         <div className="readingList">
           <Navbar />
-          <div className="main-content">
-            <header className="readingList-header">
-              <h1>Reading List</h1>
-            </header>
+        <div className="main-content">
+        <header className="readingList-header">
+        <h1>Reading List</h1>
+        <h2>Catalogue</h2>
+        </header>
             <main>
-            {catalogueTable}
+        {catalogueTable}
             <Button variant="text" onClick={() => {
+              const selectedCatalogueBooks = catalogueRows.filter((book) => {
+                console.log("Book selection");
+                console.log(book);
+                return catalogueSelected.has(book.id) && readingListRows.every((alreadyOnList) => alreadyOnList.id !== book.id);
+              })
+              readingListRows = [...readingListRows, ...selectedCatalogueBooks];
+              setReadingListRows(readingListRows);
             }}>Add Books</Button>
-            <Button variant="text" onClick={() => {
-
-            }}>Remove Books</Button>
             </main>
+            <h2>My List</h2>
             <footer className="readingList-footer">
             {readingListTable}
+            <Button variant="text" onClick={() => {
+              readingListRows = readingListRows.filter((book) =>
+               !readingListSelected.has(book.id));
+              setReadingListRows(readingListRows);
+            }}>Remove Books</Button>
             </footer>
           </div>
         </div>
