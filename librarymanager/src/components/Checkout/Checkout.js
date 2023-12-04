@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect} from 'react';
 import { Link } from 'react-router-dom';
 import '../LibraryManager/LibraryManager.css';
 import Navbar from "../Navbar/Navbar";
 import { useNavigate } from "react-router-dom";
-import { getFirestore, collection, addDoc, serverTimestamp } from 'firebase/firestore';
+import { getFirestore, collection, addDoc, serverTimestamp,query, where, onSnapshot ,getDocs} from 'firebase/firestore';
 import { auth } from "../Auth/Auth";
 import Auth from '../Auth/Auth'; 
+import { deleteDoc, doc } from 'firebase/firestore';
+
 
 
 
@@ -173,11 +175,7 @@ label {
     updatedCards.splice(index, 1);
     setCards(updatedCards);
   };
-  const [books, setBooks] = useState([
-    { author: 'Brett Ellis', title: 'American Psycho', due: 'Dec 24', price: '12.5$' },
-    { author: 'JRR Tolkein', title: 'The Hobbit', due: 'Dec 26', price: '35$' },
-    // Add more books as needed
-  ]);
+  const [books, setBooks] = useState([]);
 
   const totalFee = books.reduce((acc, book) => acc + parseFloat(book.price), 0);
   const [selectedCard, setSelectedCard] = useState(null);
@@ -187,7 +185,7 @@ label {
   };
 
 
-  const payFines = () => {
+  const payFines = async () => {
     if (!selectedCard) {
       alert('Please select a card before paying.');
       return;
@@ -198,10 +196,41 @@ label {
       return;
     }
   
-    // Logic for handling payment, e.g., redirect to a payment gateway
-    alert(`Total Fee: $${totalFee.toFixed(2)} - Payment Successful with Card: ${selectedCard.cardNumber}`);
-    sendOrderAndPaymentToFirebase();
-    setBooks([]);
+    try {
+      // Logic for handling payment, e.g., redirect to a payment gateway
+      alert(`Total Fee: $${totalFee.toFixed(2)} - Payment Successful with Card: ${selectedCard.cardNumber}`);
+  
+      // Send order and payment details to Firebase
+      sendOrderAndPaymentToFirebase();
+  
+      // Remove paid fines from the cart in Firebase
+      await removePaidFinesFromCart();
+  
+      // Clear the books state
+      setBooks([]);
+    } catch (error) {
+      console.error('Error paying fines:', error);
+    }
+  };
+  
+  const removePaidFinesFromCart = async () => {
+    try {
+      const db = getFirestore();
+      const cartCollection = collection(db, 'cart');
+  
+      // Get a reference to the cart documents for the current user
+      const cartQuery = query(cartCollection, where('userId', '==', auth.currentUser.uid));
+      const cartSnapshot = await getDocs(cartQuery);
+  
+      // Delete each document in the cart
+      cartSnapshot.forEach(async (doc) => {
+        await deleteDoc(doc.ref);
+      });
+  
+      console.log('Paid fines successfully removed from the cart');
+    } catch (error) {
+      console.error('Error removing paid fines from the cart:', error);
+    }
   };
 
   const clearTableContent = () => {
@@ -262,6 +291,38 @@ label {
       console.error('Error adding Order and Payment to Firebase: ', error);
     }
   };
+
+  useEffect(() => {
+    const fetchBooksFromCart = async () => {
+      try {
+        const db = getFirestore();
+        const cartCollection = collection(db, 'cart');
+
+        // Create a query to get books for the current user
+        const q = query(cartCollection, where('userId', '==', auth.currentUser.uid));
+
+        // Subscribe to the query and listen for changes
+        const unsubscribe = onSnapshot(q, (snapshot) => {
+          const cartBooks = snapshot.docs.map((doc) => ({
+            id: doc.id,
+            ...doc.data(),
+            due: 'Dec 24', // Set a default due date
+          }));
+          setBooks(cartBooks);
+        });
+
+        return () => {
+          // Unsubscribe when the component unmounts
+          unsubscribe();
+        };
+      } catch (error) {
+        console.error('Error fetching books from cart:', error);
+      }
+    };
+
+    fetchBooksFromCart();
+  }, []); 
+  
 
 
   return (
@@ -375,7 +436,6 @@ label {
               <tr>
                 <th>Author</th>
                 <th>Title</th>
-                <th>Due</th>
                 <th>Price</th>
               </tr>
             </thead>
@@ -384,7 +444,6 @@ label {
               <tr key={index}>
                 <td>{book.author}</td>
                 <td>{book.title}</td>
-                <td>{book.due}</td>
                 <td>{book.price}</td>
               </tr>
               ))}
