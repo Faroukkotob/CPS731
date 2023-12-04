@@ -114,7 +114,7 @@ const ReadingList = () => {
     />);
     var readingListBooks = getReadingListBooks();
     for (var bookIdReadingList in readingListBooks) {
-        const thisBook = bookCatalogue[bookIdReadingList];
+        const thisBook = readingListBooks[bookIdReadingList];
         readingListRows = [...readingListRows, {id: thisBook.id, title: thisBook.title, isbn: thisBook.isbn, author: thisBook.author, genre: thisBook.genre, price: thisBook.price}]
     }
     
