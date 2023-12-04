@@ -7,6 +7,7 @@ import SignUp from './components/SignUp/SignUp';
 import Checkout from './components/Checkout/Checkout';
 import Orders from './components/Orders/Orders';
 import ReadingList from './components/ReadingList/ReadingList';
+import Staff from './components/Orders/Staff';
 
 const App = () => {
   return (
@@ -19,6 +20,7 @@ const App = () => {
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/login" element={<Login />} />
         <Route path="/orders" element={<Orders />} />
+        <Route path="/staff" element={<Staff />} />
         </Routes>
     </Router>
   );
