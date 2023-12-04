@@ -102,10 +102,23 @@ const LibraryManager = () => {
     if (savedBooks) {
       for (var preloadedBookId in preloadBooks) {
         console.log("iterating on book:");
+        
         if(!savedBooks.includes(preloadBooks[preloadedBookId])) {
           savedBooks.push(preloadBooks[preloadedBookId]);
         }
       }
+      // sanity check for filtering books with repeat IDs
+      var keys = new Set();
+      savedBooks = savedBooks.filter((book) => {
+        if(keys.has(book.id)) {
+          console.log("Found repeat key for ID:");
+          console.log(book.id);
+          return false;
+        } else {
+          keys.add(book.id);
+          return true;
+        }
+      });
       console.log("books after iteration");
       console.log(savedBooks);
       setBooks(savedBooks);
