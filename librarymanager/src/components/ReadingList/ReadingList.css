@@ -1,0 +1,217 @@
+/* ReadingList.css */
+
+.readingList {
+    display: flex;
+    min-height: 100vh;
+}
+
+.readingList-header, .readingList-footer {
+    padding: 1rem;
+    background-color: #F5F5F5;
+}
+
+.main-content {
+    flex-grow: 1;
+    padding: 1rem;
+    overflow: auto;
+    margin-left: 20%;
+}
+
+/* Sidebar Styles */
+.sidebar {
+    width: 20%;
+    background: #D9D9D9;
+    padding: 10px;
+    height: 100vh;
+    box-sizing: border-box; 
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    overflow-y: auto;
+}
+
+.sidebar-header {
+    padding: 1rem;
+    background-color: #F5F5F5;
+    text-align: center;
+}
+
+.sidebar-section {
+    margin-bottom: 20px;
+}
+
+.sidebar-item, .sidebar-item button, .link-style {
+    color: black;
+    font-size: 14px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    line-height: 19.60px;
+    letter-spacing: 0.14px;
+    word-wrap: break-word;
+    margin-bottom: 12px;
+    background-color: white; 
+    border: none;
+    text-align: left;
+    padding: 10px 15px; 
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; 
+    border-radius: 4px; 
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); 
+    transition: background-color 0.3s; 
+    width: calc(100% - 30px); 
+    box-sizing: border-box; 
+    height: 50px; 
+    text-decoration: none; 
+}
+
+/* Icon styling within sidebar items */
+.sidebar-item img, .sidebar-item button img, .link-style img {
+    width: 20px; 
+    height: 20px; 
+    margin-right: 8px; 
+    vertical-align: middle; 
+}
+
+/* Hover effect for sidebar item/button */
+.sidebar-item:hover, .sidebar-item button:hover, .link-style:hover {
+    background-color: #f0f0f0; 
+}
+
+/* Active item/button styling */
+.sidebar-item.active, .sidebar-item button.active, .link-style.active {
+    background-color: #B0B0B0; 
+    color: white; 
+    box-shadow: none; 
+}
+
+/* Search container styling */
+.search-container {
+    margin-bottom: 20px;
+    position: relative; 
+}
+
+/* Search bar styling */
+.search-bar {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.search-bar input[type="search"] {
+    flex-grow: 1;
+    padding: 10px 10px 10px 35px; 
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.search-bar button {
+    position: absolute;
+    left: 10px; 
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    color: black; 
+}
+
+/* Book Carousel Styles */
+.embla {
+    overflow: hidden;
+  }
+  .embla__container {
+    align-items: flex-end;
+    display: flex;
+    padding-bottom: 20px;
+  }
+  .embla__slide {
+    flex: 0 0 30%;
+    min-width: 0;
+    align-items:baseline
+  }
+
+.carousel {
+    display: flex;
+    overflow-x: auto;
+    gap: 10px;
+}
+
+.book {
+    margin: 0 10px;
+    flex: 0 0 auto;
+    text-align: center;
+    align-items: center;
+    width: 200px;
+    height: 500;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: #F5F5F5;
+    padding: 10px;
+    border-radius: 4px;
+    box-shadow: 0 4px 8
+    px rgba(0,0,0,0.1);
+}
+
+.book img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    margin-bottom: 10px;
+}
+
+/* Add Book Form Styles */
+.add-book-form {
+    margin-bottom: 2rem;
+}
+
+.add-book-form input[type="text"], .add-book-form textarea {
+    margin-bottom: 1rem;
+    width: 100%;
+    padding: 0.5rem;
+    box-sizing: border-box;
+}
+
+.add-book-form button {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+}
+
+/* Footer Styles */
+.readingList-footer {
+    padding: 1rem;
+    background-color: #F5F5F5;
+    text-align: center;
+}
+
+/* Additional Link Styles */
+.link-style {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+    }
+
+    .main-content {
+        margin-left: 0;
+    }
+
+    .sidebar-item, .sidebar-item button, .link-style {
+        width: auto; 
+        padding-left: 15px; 
+        padding-right: 15px; 
+        height: auto; 
+    }
+}

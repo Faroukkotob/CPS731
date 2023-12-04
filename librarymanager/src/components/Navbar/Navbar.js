@@ -8,6 +8,7 @@ import profileIcon from './profile.jpg';
 import loginIcon from './login.jpg'; 
 import searchIcon from './Search.jpg';
 import Auth from '../Auth/Auth'; 
+import ReadingList from '../ReadingList/ReadingList';
 
 const Navbar = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -46,9 +47,9 @@ const Navbar = () => {
         <button className="sidebar-item active">
           <img src={dashboardIcon} alt="Dashboard" className="sidebar-icon" /> Dashboard
         </button>
-        <button className="sidebar-item">
+        <Link to="/readingList" className="sidebar-item link-style">
           <img src={readingListIcon} alt="Reading List" className="sidebar-icon" /> Reading List
-        </button>
+        </Link>
         <Link to="/libraryManager" className="sidebar-item link-style">
           <img src={manageInventoryIcon} alt="Manage Inventory" className="sidebar-icon" /> Manage Inventory (staff)
         </Link>
