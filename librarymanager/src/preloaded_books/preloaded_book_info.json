@@ -5,6 +5,7 @@
         "isbn": "9780307278630",
         "author": "Brett Ellis",
         "genre": "Horror",
+        "price": "12.5",
         "pictures": ["https://s26162.pcdn.co/wp-content/uploads/2018/05/american-psycho-670x1024.jpg"],
         "description": ""
     },
@@ -14,6 +15,7 @@
         "isbn": "9780545010221",
         "author": "JK Rowling",
         "genre": "Fantasy",
+        "price": "88",
         "pictures": ["https://m.media-amazon.com/images/I/61ItOr+01UL._AC_UF894,1000_QL80_.jpg"],
         "description": ""
     },
@@ -23,6 +25,7 @@
         "isbn": "9780331928389",
         "author": "Megan Campisi",
         "genre": "Historical Fiction",
+        "price": "77",
         "pictures": ["https://d28hgpri8am2if.cloudfront.net/book_images/onix/cvr9781982124113/sin-eater-9781982124113_hr.jpg"],
         "description": ""
     },
@@ -32,6 +35,7 @@
         "isbn": "9780007525508",
         "author": "JRR Tolkein",
         "genre": "Fantasy",
+        "price": "35",
         "pictures": ["https://www.creatopy.com/blog/wp-content/uploads/2020/08/The-Hobbit-Book-Cover-441x600.jpg"],
         "description": ""
     },
@@ -41,6 +45,7 @@
         "isbn": "9780451191144",
         "author": "Ayn Rand",
         "genre": "Science Fiction",
+        "price": "25",
         "pictures": ["https://img.huffingtonpost.com/asset/5bb62168260000360082ecc1.jpeg?ops=scalefit_720_noupscale"],
         "description": ""
     }
