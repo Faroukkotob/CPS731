@@ -31,10 +31,10 @@ function getReadingListBooks() {
 const columns = [
     { field: 'id', headerName: 'ID', width: 70 },
     { field: 'title', headerName: 'Title', width: 200 },
-    { field: 'isbn', headerName: 'Last name', width: 200 },
+    { field: 'isbn', headerName: 'Isbn', width: 200 },
     { field: 'author', headerName: 'Author', width: 200 },
     { field: 'genre', headerName: 'Genre', width: 200 },
-    { field: 'price ($)', headerName: 'Price', width: 200 }
+    { field: 'price', headerName: 'Price', width: 200 }
 ];
 
 var readingListSelected = new Set();
@@ -49,7 +49,7 @@ const ReadingList = () => {
     var bookCatalogue = getCatalogue();
     for (var bookIdCatalogue in bookCatalogue) {
         const thisBook = bookCatalogue[bookIdCatalogue];
-        catalogueRows = [...catalogueRows, {id: thisBook.id, title: thisBook.title, isbn: thisBook.isbn, author: thisBook.author, genre: thisBook.genre, price:thisBook.price}];
+        catalogueRows = [...catalogueRows, {id: thisBook.id, title: thisBook.title, isbn: thisBook.isbn, author: thisBook.author, genre: thisBook.genre, price: thisBook.price}];
     }
   
     function onCatalogueSelectionModelChange(ids) {
