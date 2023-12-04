@@ -174,8 +174,8 @@ label {
     setCards(updatedCards);
   };
   const [books, setBooks] = useState([
-    { author: 'zuheir', title: 'psy', due: 'jan 24', price: '71.2$' },
-    { author: 'seema', title: 'cs', due: 'DEC 26', price: '13.5$' },
+    { author: 'Brett Ellis', title: 'American Psycho', due: 'Dec 24', price: '12.5$' },
+    { author: 'JRR Tolkein', title: 'The Hobbit', due: 'Dec 26', price: '35$' },
     // Add more books as needed
   ]);
 
