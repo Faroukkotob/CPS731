@@ -123,11 +123,14 @@
     overflow: hidden;
   }
   .embla__container {
+    align-items: flex-end;
     display: flex;
+    padding-bottom: 20px;
   }
   .embla__slide {
     flex: 0 0 30%;
     min-width: 0;
+    align-items:baseline
   }
 
 .carousel {
@@ -140,8 +143,9 @@
     margin: 0 10px;
     flex: 0 0 auto;
     text-align: center;
+    align-items: center;
     width: 200px;
-    height: auto;
+    height: 500;
     display: flex;
     flex-direction: column;
     justify-content: center;
