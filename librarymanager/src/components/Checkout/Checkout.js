@@ -93,13 +93,28 @@ label {
   }
   .pay-fines-button {
     display: flex;
-    width: 400px;
+    width: 200px;
     padding: 16px;
     justify-content: center;
     align-items: center;
     gap: 10px;
     border-radius: 8px;
     background: var(--green, #1BB66E);
+    text-align: center;
+    color: white; /* Adjust text color */
+    font-size: 16px; /* Adjust font size */
+    cursor: pointer;
+    border: none;
+  }
+  .remove-fines-button {
+    display: flex;
+    width: 200px;
+    padding: 16px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-radius: 8px;
+    background: red;
     text-align: center;
     color: white; /* Adjust text color */
     font-size: 16px; /* Adjust font size */
@@ -451,7 +466,8 @@ label {
             </table>
             <div className="total-fee-section">
               <p>Total Fee: ${totalFee.toFixed(2)}</p>
-              <button onClick={() => { payFines();}} className="pay-fines-button">Pay Fines</button>
+              <button onClick={() => { payFines();}} className="pay-fines-button">Place Order</button><br></br>
+              <button onClick={() => { removePaidFinesFromCart();}} className="remove-fines-button">Cancel</button>
             </div>
           </div>
         </div>
