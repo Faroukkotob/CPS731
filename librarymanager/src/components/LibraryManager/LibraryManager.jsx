@@ -69,7 +69,7 @@ const responsive = {
 const BookCarousel = ({ books }) => {
     const [emblaRef] = useEmblaCarousel({slidesToScroll: 3})
     var booksRenders = books.map(book => (
-      <div className="embla__slide">
+      <div className="embla__slide" key={book.id}>
       <div className="book" key={book.id}>
         {book.pictures.map((picture, index) => (
           <img key={index} src={picture} alt={`${book.title} - ${index + 1}`} />
