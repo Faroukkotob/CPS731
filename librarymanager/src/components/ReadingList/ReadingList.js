@@ -42,7 +42,7 @@ const ReadingList = () => {
     var catalogueRows = [];
     for (var bookIdCatalogue in bookCatalogue) {
         const thisBook = bookCatalogue[bookIdCatalogue];
-        catalogueRows.push({id: thisBook.id, title: thisBook.title, isbn: thisBook.isbn, author: thisBook.author, genre: thisBook.genre});
+        catalogueRows.push({id: thisBook.id, title: thisBook.title, isbn: thisBook.isbn, author: thisBook.author, genre: thisBook.genre,price: thisBook.price});
     }
     
     //var catalogueTableRef = useGridApiContext();
@@ -61,7 +61,7 @@ const ReadingList = () => {
     var readingListRows = [];
     for (var bookIdReadingList in readingListBooks) {
         const thisBook = bookCatalogue[bookIdReadingList];
-        readingListRows.push({id: thisBook.id, title: thisBook.title, isbn: thisBook.isbn, author: thisBook.author, genre: thisBook.genre});
+        readingListRows.push({id: thisBook.id, title: thisBook.title, isbn: thisBook.isbn, author: thisBook.author, genre: thisBook.genre,price: thisBook.price});
     }
     
    // var readingTableRef = useGridApiContext();
